@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #333;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+        }
+
+        form button {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background: #555;
+        }
+
+        #job-list {
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        #job-list h2 {
+            margin-top: 0;
+        }
+
+        .job {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+        .job h3 {
+            margin: 0;
+        }
+
+        .job p {
+            margin: 5px 0;
+        }
+
+        .job strong {
+            display: block;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Job Board</h1>
+        </header>
+        <main>
+            <section id="post-job">
+                <h2>Post a Job</h2>
+                <form id="job-form">
+                    <input type="text" id="title" placeholder="Job Title" required>
+                    <input type="text" id="company" placeholder="Company" required>
+                    <input type="text" id="location" placeholder="Location" required>
+                    <input type="text" id="salary" placeholder="Salary" required>
+                    <textarea id="description" placeholder="Job Description" required></textarea>
+                    <button type="submit">Post Job</button>
+                </form>
+            </section>
+            <section id="job-list">
+                <h2>Job Listings</h2>
+                <div id="jobs"></div>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.getElementById('job-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const title = document.getElementById('title').value;
+            const company = document.getElementById('company').value;
+            const location = document.getElementById('location').value;
+            const salary = document.getElementById('salary').value;
+            const description = document.getElementById('description').value;
+            
+            // Create job element
+            const job = document.createElement('div');
+            job.className = 'job';
+            job.innerHTML = `
+                <h3>${title}</h3>
+                <p><strong>Company:</strong> ${company}</p>
+                <p><strong>Location:</strong> ${location}</p>
+                <p><strong>Salary:</strong> ${salary}</p>
+                <p>${description}</p>
+            `;
+            
+            // Add job to job list
+            document.getElementById('jobs').appendChild(job);
+            
+            // Clear form
+            document.getElementById('job-form').reset();
+        });
+    </script>
+</body>
+</html>
